@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   var gifArray = ["Community", "Arrested Development", "30 Rock", "Parks and Rec"];
   var userInput = $("#buttonId").val();
-  var classCounter = 0;
+  
 
   function addButtons() {
     $("#sitcomButtons").empty();
@@ -19,7 +19,6 @@ $(document).ready(function () {
 
     }
   }
-
 
   $("#submit").on("click", function () {
     var userInput = $("#sitcomInput").val();
@@ -45,9 +44,12 @@ $(document).ready(function () {
       for (var i = 0; i < results.length; i++) {
         var giphyDiv = $("<div>");
         var giphyImage = $("<img>");
-        giphyImage.attr("src", results[i].url);
+        giphyImage.attr("src", results[i].images.fixed_width.url);
+        giphyImage.attr("alt", "Hello World");
+        giphyImage.attr("id", "displayGif");
+        giphyDiv.addClass("style");
         giphyDiv.append(giphyImage);
-        $("#giphy").append(giphyDiv);
+        $("#giphy").prepend(giphyDiv);
       }
     });
   });

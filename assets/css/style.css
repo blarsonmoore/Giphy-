@@ -2,9 +2,30 @@
   color: white;
 }
 
-
-
 .buttonClass {
   color: red;
   margin: 10px;
+}
+
+#formInfo {
+  float: left;
+}
+
+.form-inline {
+  padding-top: 5px;
+}
+
+#displayGif {
+  margin: 3px;
+  padding: 0;
+  border: 0;
+  vertical-align: bottom;
+  display: table-cell;
+  /* display: inline !important; */
+}
+
+#giphy {
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  background: linear-gradient(to bottom right, #0000ff -5%, #00ffff 70%);
 }
