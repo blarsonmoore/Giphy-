@@ -3,11 +3,10 @@ $(document).ready(function () {
 
   var gifArray = ["Community", "Arrested Development", "30 Rock", "Parks and Rec"];
   var userInput = $("#buttonId").val();
-  
+
 
   function addButtons() {
     $("#sitcomButtons").empty();
-
     for (var i = 0; i < gifArray.length; i++) {
       var newButtons = $("<button>").on("click", function () {
         $(this).attr('id', "giffyPic");
@@ -21,19 +20,21 @@ $(document).ready(function () {
   }
 
   $("#submit").on("click", function () {
+    event.preventDefault();
     var userInput = $("#sitcomInput").val();
-    console.log(userInput);
     gifArray.push(userInput)
     $("#sitcomInput").val("");
-    console.log(gifArray);
     addButtons();
   });
 
 
-  $("#sitcomButtons").on("click", function () {
-    var gifDisplay = $("#giffyPic").text();
+  $(document).on("click", "#sitcomButtons", function (e) {
+    // var gifDisplay = $("#giffyPic").text();
+    console.log(e.target);
+    var gifDisplay = e.target.innerHTML;
+
+    // $("#sitcomButtons").empty();
     var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=yrUL7JUduZPHSvywa6qyfPyXGgAiVkPa&q=" + gifDisplay + "&limit=10&offset=0&rating=PG-13&lang=en";
-    console.log(gifDisplay);
     $.ajax({
       url: giphyURL,
       method: "GET",
@@ -52,6 +53,7 @@ $(document).ready(function () {
         $("#giphy").prepend(giphyDiv);
       }
     });
+    // addButtons();
   });
 
   addButtons();
