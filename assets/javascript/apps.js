@@ -45,16 +45,34 @@ $(document).ready(function () {
       for (var i = 0; i < results.length; i++) {
         var giphyDiv = $("<div>");
         var giphyImage = $("<img>");
-        giphyImage.attr("src", results[i].images.fixed_width.url);
+        var animate = results[i].images.fixed_width.url;
+        giphyImage.attr("src", results[i].images.fixed_width_still.url);
         giphyImage.attr("alt", "Hello World");
         giphyImage.attr("id", "displayGif");
+        giphyImage.attr("data-state", "still");
         giphyDiv.addClass("style");
         giphyDiv.append(giphyImage);
         $("#giphy").prepend(giphyDiv);
+
+
+        $("#displayGif").on("click", function () {
+          var state = $(this).attr("data-state");
+          if (state === "still") {
+            $(this).attr("src", results[i].images.fixed_width.url);
+            $(this).attr("data-state", "animate");
+          } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+          }
+
+        });
       }
-    });
-    // addButtons();
+    })
   });
+
+
+
+
 
   addButtons();
 });
