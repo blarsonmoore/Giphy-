@@ -46,33 +46,35 @@ $(document).ready(function () {
         var giphyDiv = $("<div>");
         var giphyImage = $("<img>");
         var animate = results[i].images.fixed_width.url;
-        giphyImage.attr("src", results[i].images.fixed_width_still.url);
+        var still = results[i].images.fixed_width_still.url;
+        giphyImage.attr("src", still);
         giphyImage.attr("alt", "Hello World");
         giphyImage.attr("id", "displayGif");
         giphyImage.attr("data-state", "still");
         giphyDiv.addClass("style");
         giphyDiv.append(giphyImage);
         $("#giphy").prepend(giphyDiv);
-
-
-        $("#displayGif").on("click", function () {
-          var state = $(this).attr("data-state");
-          if (state === "still") {
-            $(this).attr("src", results[i].images.fixed_width.url);
-            $(this).attr("data-state", "animate");
-          } else {
-            $(this).attr("src", $(this).attr("data-still"));
-            $(this).attr("data-state", "still");
-          }
-
-        });
       }
-    })
+      $("#displayGif").on("click", function () {
+
+        var state = $("#displayGif").attr("data-state");
+
+
+        if (state === "still") {
+          $("#displayGif").attr("src", animate);
+          $("#displayGif").attr("data-state", "animate");
+        }
+        else if (state === "animate") {
+          $("#displayGif").attr("src", still);
+          $("#displayGif").attr("data-state", "still");
+        }
+        else {
+          $("#displayGif").attr("src", $("#displayGif").attr("data-still"));
+          $("#displayGif").attr("data-state", "still");
+        }
+      });
+    });
+
   });
-
-
-
-
-
   addButtons();
 });
